@@ -219,5 +219,9 @@ There are several things I have yet to do and will get to them as time allows:
 6. Change the getPinMode output to match the input of pinMode
 7. Add enums for all the common TCA/PCA 95xx GPIO expanders to make it easier and for validation.  Add this as both an external function for specifying the device (like hexAdress) AND as an optional variable input to the existing functions.  Also allow direct modification of the variable data for an OTHER device for custom implmentations.
 8. Finish the SoftReset function to initilize a i2c GPIO device and return it to it's just turned on state
+9. Add a method for sending eithier a bool array, HEX, BIN, or DEC code to a device when writing the whole port at once.
+10. Add a function for inverting the output level (HIGH/LOW) for the entire port at once.
 
-If you would like to contribute, contact me and I would gladly except the help as my free time is extreamly limited.
+I can't think of anything else right now.
+
+If you would like to contribute, contact me and I would gladly except the help as my free time is _extreamly_ limited.
