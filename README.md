@@ -2,11 +2,11 @@
 
 ## Arduino Compatible PCA95xx/TCA95xx i2c GPIO Library
 
-This is a Arduino compatible xCA9500 i2c GPIO Expander library which is compatible with neraly _ALL_ i2c GPIO devices and allows you to connect to and manipulate multiple devices while only substantiating a single instance of the library and allows standard notation such as HIGH/LOW and digitalRead and digitalWrite!
+This is a Arduino compatible xCA9500 i2c GPIO Expander library which is compatible with neraly _ALL_ i2c GPIO devices and allows you to connect to and manipulate multiple devices while only substantiating a single instance of the library and allows standard notation such as HIGH/LOW, INPUT/OUTPUT, digitalRead, digitalWrite, and pinMode!
 
 One of the most annoying things about all the i2c libraries and device handlers is that the library must be invoked more than once to communicate with multiple devices.  I could not find a library that allowed you to address multiple i2c GPIO expanders without having to call the library multiple times using different friendly names.  _Why is this so hard?_
 
-The other annoying thing seems to be that every library used non-standard calls, instead of digitalWrite and digitalRead and pinMode as well as utilized non-standard input and output aliases instead of the standard INPUT and OUTPUT.  _Again, why is this so hard?_
+The other annoying thing seems to be that every other i2c library used non-standard calls, instead of digitalWrite, digitalRead, and pinMode as well as utilized non-standard input and output aliases instead of the standard INPUT and OUTPUT.  _Again, why is this so hard?_
 
 Well I was frustrated every time I turned around to test a new i2c device and needed a device specific library from Seed or Spark that used different aliases.
 
@@ -178,7 +178,7 @@ _i2c.pinMode(6, OUTPUT, 0x73);
 
 This sets the mode to input or output of the specified _PORT_.  The port values are passed in as array.  _This will utilize the last used i2c address._  If a new address is desired, you will have to make a call to hexAddress first.  Generally the common address is 0x03 for the port mode.  If your device uses a different register, you will have to change the variable CONFIGURATION_REGISTER in CA9500.hpp.  There is NO checking to make sure the port or bit exists.  This _may_ be added later by creating enums for each device.  
 
-**This is where more magic happens and what allows this i2c handler to use standard INPUT and OUTPUT.  The Arduino IDE (and others) define the alias INPTUT as 0 and OUTPUT as 1.  However, most i2c devices utilize 0 as the OUTPUT and 1 as the INPUT, the opposite.  So as the data is constructed the specifed direction in the function is xORd to itself effectviely inverting the data before it is written.**
+**This is where more magic happens and what allows this i2c handler to use standard INPUT and OUTPUT.  The Arduino IDE (and others) define the alias INPTUT as 0x0 and OUTPUT as 0x1.  However, most i2c devices utilize 0x0 as the OUTPUT and 0x1 as the INPUT, the complete opposite.  So as the data is constructed the specifed direction in the function is xORd to itself effectviely inverting the data before it is written.**
 
 Returns the value.
 
@@ -200,7 +200,7 @@ This checks to see if a specified port bit is an output or input.  Port bits are
 
 This can also be called without the address and the last used address will be utilized.
 
-Returns the value, 0 = OUTPUT, 1 = INPUT  **NOTE:** _The return is NOT inverted. So a return value of 0 is not an input BUT an output.  This is the opposite of what you would expect and the opposite of pinMode above.  I will fix this at a later date._
+Returns the value, 0 = OUTPUT, 1 = INPUT  **NOTE:** _This is where the Magic Should Have Happened! The return is NOT inverted. So a return value of 0 is not an input BUT an output.  This is the opposite of what you would expect and the opposite of pinMode above.  I will fix this at a later date._
 
 ```CPP
 // check the pinMode for port 7 for i2c device at address 0x71
@@ -217,4 +217,7 @@ There are several things I have yet to do and will get to them as time allows:
 4. Ensure that all register functions (Read, Write, Inversion, Mode) are congruent in thier methods of call and variables passed.
 5. Add an external function for changing the standard registers (Read, Write, Inversion, Mode) to non-standard address identifiers
 6. Change the getPinMode output to match the input of pinMode
-7. Add enums for all the common TCA/PCA 95xx GPIO expanders to make it easier and for validation.  Add this as both an external function for specifying the device (like hexAdress) AND as an optional variable input to the existing functions.
+7. Add enums for all the common TCA/PCA 95xx GPIO expanders to make it easier and for validation.  Add this as both an external function for specifying the device (like hexAdress) AND as an optional variable input to the existing functions.  Also allow direct modification of the variable data for an OTHER device for custom implmentations.
+8. Finish the SoftReset function to initilize a i2c GPIO device and return it to it's just turned on state
+
+If you would like to contribute, contact me and I would gladly except the help as my free time is extreamly limited.
