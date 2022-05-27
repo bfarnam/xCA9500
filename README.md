@@ -4,6 +4,8 @@
 
 This is a Arduino compatible xCA9500 i2c GPIO Expander library which is compatible with neraly _ALL_ 95xx i2c GPIO devices and allows you to connect to and manipulate multiple devices while only substantiating a single instance of the library and allows standard notation such as HIGH/LOW, INPUT/OUTPUT, digitalRead, digitalWrite, and pinMode!
 
+So far I have tested this with the Texas Instruments TCA9534 8-bit I/O expander with interrupt as used on the SparkFun Qwicc GPIO and with the NXP PCA9538 (Same as TI TCA9538/PCA9538 just higher grade) 8-bit I/O expander with interrupt and reset on both break out boards and in an embedded system.
+
 One of the most annoying things about all the i2c libraries and device handlers is that the library must be invoked more than once to communicate with multiple devices.  I could not find a library that allowed you to address multiple i2c GPIO expanders without having to call the library multiple times using different friendly names.  _Why is this so hard?_
 
 The other annoying thing seems to be that every other i2c library used non-standard calls, instead of digitalWrite, digitalRead, and pinMode as well as utilized non-standard input and output aliases instead of the standard INPUT and OUTPUT.  _Again, why is this so hard?_
