@@ -2,7 +2,7 @@
 
 ## Arduino Compatible PCA95xx/TCA95xx i2c GPIO Library
 
-This is a Arduino compatible xCA9500 i2c GPIO Expander library which is compatible with neraly _ALL_ i2c GPIO devices and allows you to connect to and manipulate multiple devices while only substantiating a single instance of the library and allows standard notation such as HIGH/LOW, INPUT/OUTPUT, digitalRead, digitalWrite, and pinMode!
+This is a Arduino compatible xCA9500 i2c GPIO Expander library which is compatible with neraly _ALL_ 95xx i2c GPIO devices and allows you to connect to and manipulate multiple devices while only substantiating a single instance of the library and allows standard notation such as HIGH/LOW, INPUT/OUTPUT, digitalRead, digitalWrite, and pinMode!
 
 One of the most annoying things about all the i2c libraries and device handlers is that the library must be invoked more than once to communicate with multiple devices.  I could not find a library that allowed you to address multiple i2c GPIO expanders without having to call the library multiple times using different friendly names.  _Why is this so hard?_
 
